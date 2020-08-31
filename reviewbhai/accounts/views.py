@@ -55,14 +55,22 @@ def profile_view(request,username):
 
 @login_required
 def updateprofile_view(request):
+    #user = request.user.username
     if request.method == 'POST':
+        password1 = request.POST.get('confirm_password')
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,request.FILES, instance= request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Information Updated')
-            return redirect('profile',request.user.username)
+        success = request.user.check_password(password1)
+        if success:
+            if u_form.is_valid() and p_form.is_valid():
+                u_form.save()
+                p_form.save()
+                messages.success(request, f'Information Updated')
+                return redirect('profile',request.user.username)
+        else:
+            messages.success(request, f'Incorrect password. Enter password correctly.')
+            u_form = UserUpdateForm(instance=request.user)
+            p_form = ProfileUpdateForm()
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm()

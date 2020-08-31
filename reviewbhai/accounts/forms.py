@@ -26,10 +26,11 @@ class LogInForm(forms.ModelForm):
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
+    confirm_password = forms.CharField(max_length=20,required=True, label='Enter your password', widget=forms.PasswordInput)
 
     class Meta:
         model = Account
-        fields = ['fullname','email']
+        fields = ['fullname','email','confirm_password']
 
 
 class ProfileUpdateForm(forms.ModelForm):
