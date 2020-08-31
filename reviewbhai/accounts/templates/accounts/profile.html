@@ -1,0 +1,49 @@
+<br>{% extends 'reviews/base.html'%}
+
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ object.profile.image.url }}">
+            <div class="media-body">
+              <h2 class="account-heading">{{ object.fullname }}</h2>
+                <div>
+                    <b>Username:</b> <span style="color: #00b3ff">@{{ object.username }}</span>
+                </div>
+                <div>
+                   <b>Contact:</b> <span style="color: #00b3ff">{{ object.email }}</span>
+                </div>
+                <div>
+                   <b>Joined at:</b> <span style="color: #00b3ff">{{ object.date_joined }}</span>
+                </div>
+            </div>
+            {% if object.username == user.username %}
+                <small class="text-muted">
+                    <a class="btn btn-outline-info btn-sm mt-0 mb-0" href="{% url 'editprofile' %}" >Edit Profile</a>
+                </small>
+            {% endif %}
+
+        </div>
+        <div>
+            <small class="text-muted">
+                <a class="btn btn-info btn-m btn-block" href="#" >Posts</a>
+            </small>
+        </div>
+        <div>
+            &nbsp
+        </div>
+     {% for item in user_posts %}
+        <article class="media content-section">
+            <div class="media-body">
+                <h6><a class="article-title" href="{% url 'postdetail' item.id %}">{{item.title}} &nbsp </a> </h6>
+                <small class="text-muted"  > (posted at {{item.time_posted|date:"F d,Y"}})</small> &nbsp
+                {% if object.username == user.username %}
+                    <a class="btn btn-outline-warning btn-sm mt-0 mb-0" href="{% url 'updatepost' item.slug %}">Update</a> &nbsp
+                    <a class="btn btn-outline-danger btn-sm mt-0 mb-0" href="{% url 'deletepost' item.slug %}">Delete</a>
+                {%endif%}
+
+            </div>
+        </article>
+     {% endfor %}
+
+    </div>
+{%endblock%}
