@@ -1,0 +1,17 @@
+{% extends 'reviews/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="post" >
+            {% csrf_token %}
+            <fieldset>
+                <legend class="border-bottom mb-4">Delete the review ?</legend>
+                <h2>Are you sure to delete the post  "{{object.review_title}}"</h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Delete</button>
+                <a class="btn btn-outline-warning" href="{% url 'reviewdetails' object.slug %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

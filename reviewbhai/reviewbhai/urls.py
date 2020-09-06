@@ -19,10 +19,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from accounts.views import login_view,register_view, logout_view, profile_view, updateprofile_view
+from reviews.views import CreateReview, ReviewDetails, ShowReviews, UpdateReview, DeleteReview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('reviews.urls')),
+    # path('',include('reviews.urls')),
     path('login/',login_view,name='login'),
     path('logout/',logout_view,name='logout'),
     path('register/',register_view,name='registration'),
@@ -37,6 +38,14 @@ urlpatterns = [
     path('resetpass/done', auth_views.PasswordResetDoneView.as_view(template_name='accounts/password_reset_done.html'),name='password_reset_done'),
     path('resetpassconfirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='accounts/password_reset_confirm.html'),name='password_reset_confirm'),
     path('resetpasscomplete/',auth_views.PasswordResetCompleteView.as_view(template_name='accounts/password_reset_complete.html'),name='password_reset_complete'),
+
+    ##Review Related urls
+    path('',ShowReviews.as_view(),name='home'),
+    path('postreview/',CreateReview.as_view(),name='createreview'),
+    path('reviewdetails/<slug:slug>/',ReviewDetails.as_view(),name='reviewdetails'),
+    path('updatereview/<slug:slug>/',UpdateReview.as_view(),name='reviewupdate'),
+    path('deletereview/<slug:slug>/',DeleteReview.as_view(),name='reviewdelete'),
+
 
 
     #path('user/',include('accounts.urls')),

@@ -1,0 +1,16 @@
+{% extends "reviews/base.html" %}
+{% block content %}
+     {% for item in reviews %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{item.author.profile.image.url}}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="{%url 'profile' item.author.username %}">{{item.author.fullname}}</a>
+                    <small class="text-muted">{{item.time_posted|date:"F d,Y"}}</small>
+                </div>
+                <h3><a class="article-title" href="{% url 'reviewdetails' item.slug %}">{{item.review_title}}</a> </h3>
+                <p class="article-content">{{item.review_body | truncatewords_html:100}}</p>
+            </div>
+        </article>
+     {% endfor %}
+{% endblock content %}
