@@ -14,12 +14,18 @@ class Tag(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     foods_or_travel = models.IntegerField()
 
+    def __str__(self):
+        return self.tag_name
+
 ## Model for food items
 class Item(models.Model):
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
     food_or_travel = models.CharField(max_length=20)
     date_added = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.name
 
 ## Model for review
 class Review(models.Model):
@@ -47,7 +53,6 @@ class Review(models.Model):
         self.slug = slugify(time+'_'+self.review_title+author_id)
         return super().save(*args, **kwargs)
 
-
 ## model for stars
 class Star(models.Model):
     post_id = models.ForeignKey(Review, on_delete = models.CASCADE )
@@ -66,9 +71,10 @@ class Reaction(models.Model):
     is_helpful = models.BooleanField(default=False)
 
 
-def get_image_name(instance,name):
-    id = instance.review.id
-    return "review_images/%s" % (id)
+def get_image_name(instance, imagename):
+    title = instance.review.review_title
+    slug = slugify(title)
+    return "review_images/%s-%s" % (slug, imagename)
 
 class Image(models.Model):
     review = models.ForeignKey(Review,default=None, on_delete = models.CASCADE)

@@ -41,7 +41,7 @@ urlpatterns = [
 
     ##Review Related urls
     path('',ShowReviews.as_view(),name='home'),
-    path('postreview/',CreateReview.as_view(),name='createreview'),
+    path('postreview/',CreateReview,name='createreview'),
     path('reviewdetails/<slug:slug>/',ReviewDetails.as_view(),name='reviewdetails'),
     path('updatereview/<slug:slug>/',UpdateReview.as_view(),name='reviewupdate'),
     path('deletereview/<slug:slug>/',DeleteReview.as_view(),name='reviewdelete'),
