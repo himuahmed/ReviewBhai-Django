@@ -1,5 +1,28 @@
 {% extends "reviews/base.html" %}
+{%load static%}
 {% block content %}
+            <head>
+                <link rel="stylesheet" type="text/css" href="{% static 'reviews/reviewImageGallery.css'%}">
+<script>
+    $(document).ready(function(){
+  $(".fancybox").fancybox({
+        openEffect: "none",
+        closeEffect: "none"
+    });
+
+    $(".zoom").hover(function(){
+
+		$(this).addClass('transition');
+	}, function(){
+
+		$(this).removeClass('transition');
+	});
+});
+
+</script>
+<!------ Include the above in your HEAD tag ---------->
+            </head>
+
         <article class="media content-section">
             <img class="rounded-circle article-img" src="{{object.author.profile.image.url}}">
             <div class="media-body">
@@ -11,8 +34,23 @@
                         <a class="btn btn-outline-danger btn-sm mt-1 mb-1" href="{% url 'reviewdelete' object.slug %}">Delete</a>
                     {% endif %}
                 </div>
+                <div class="container page-top">
+                    <div class="row">
+                        {% for image in object.image_set.all%}
+                            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                                <a href="{{image.image.url}}" class="fancybox" rel="ligthbox">
+                                    <img  src="{{image.image.url}}" class="zoom img-fluid "  alt="">
+                                </a>
+                            </div>
+                        {%endfor%}
+                    </div>
+                </div>
+
                 <h3 class="article-title">{{object.review_title}} </h3>
                 <p class="article-content">{{object.review_body}}</p>
             </div>
         </article>
+
+
+
 {% endblock content %}

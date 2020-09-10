@@ -31,7 +31,7 @@ class Item(models.Model):
 class Review(models.Model):
     review_title = models.CharField(verbose_name='Title', max_length=100)
     review_body = models.TextField()
-    is_offer_or_planned = models.IntegerField(verbose_name='Offered or planned')
+    is_offer_or_planned = models.BooleanField(verbose_name='Offered or planned')
     is_recommended = models.BooleanField(verbose_name='Recommended')
     author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     time_posted = models.DateTimeField(default=timezone.now)
@@ -79,6 +79,7 @@ def get_image_name(instance, imagename):
 class Image(models.Model):
     review = models.ForeignKey(Review,default=None, on_delete = models.CASCADE)
     image = models.ImageField(upload_to=get_image_name,verbose_name='Image')
+
 
 
 

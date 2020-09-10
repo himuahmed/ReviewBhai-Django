@@ -12,7 +12,9 @@
                 <div class="card" style="border:none;" >
                   <div class="row ">
                     <div class="col-md-3">
-                        <img src="{{item.author.profile.image.url}}" class="w-100">
+                        {% for photos in item.image_set.all%}
+                        <img src="{{photos.image.url}}" class="w-100">
+                        {%endfor%}
                       </div>
                       <div class="col-md-9 px-1">
                         <div class="card-block px-1">

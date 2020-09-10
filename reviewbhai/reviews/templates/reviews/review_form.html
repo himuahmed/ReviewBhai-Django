@@ -4,15 +4,9 @@
     <div class="content-section">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <fieldset>
-                <legend class="border-bottom mb-4">Create Review</legend>
-
-                {{formset|crispy}}
-                {{reviewForm|crispy}}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Post</button>
-            </div>
+            {{reviewForm|crispy}}
+            {{formset|crispy}}
+            <button type="submit" class="btn btn-info">Post</button>
         </form>
     </div>
 {% endblock content %}

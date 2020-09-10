@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import  ListView, DetailView, UpdateView, DeleteView
 
 from.models import Review, Image
-from .forms import ReviewForm, ImageForm
+from .forms import ReviewForm, ImageForm, ReviewFullForm,UpdateReviewForm
 from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect
 
@@ -37,6 +37,27 @@ def CreateReview(request):
     return render(request,'reviews/review_form.html',{'reviewForm':reviewForm,'formset':formset})
 
 
+# def UpdateReview(request,slug):
+#     context = {}
+#
+#     user = request.user
+#     if not user.is_authenticated:
+#         return redirect("home")
+#
+#     review = get_object_or_404(Review,slug)
+#     if request.POST:
+#         form = UpdateReviewForm(request.POST or None, request.FILES or None)
+#         if form.is_valid():
+#             obj = form.save(commit=False)
+#             obj.save()
+#             context['success_message'] = "Review Updated"
+#             review = obj
+#
+#     form = UpdateReviewForm
+
+
+
+
 
 
 
@@ -52,6 +73,7 @@ class ReviewDetails(DetailView):
     time = str(Review.time_posted)
     prepopulated_fields = {'slug':('time+title+"Review.author.id"',)}
     #self.slug = slugify(time + '_' + self.review_title + author_id)
+
 
 class UpdateReview(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Review

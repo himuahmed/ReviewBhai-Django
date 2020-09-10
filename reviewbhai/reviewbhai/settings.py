@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'reviews.apps.ReviewsConfig',
+    'django_cleanup',
     'accounts.apps.AccountsConfig',
     'crispy_forms',
     'django.contrib.admin',
