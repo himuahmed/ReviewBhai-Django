@@ -20,7 +20,10 @@ def CreateReview(request):
         if reviewForm.is_valid() and formset.is_valid():
             review_form = reviewForm.save(commit=False)
             review_form.author = request.user
+            review_form.post_or_discussion = 1
+            review_form.food_or_travel = 'Foods'
             review_form.save()
+            reviewForm.save_m2m()
 
             for form in formset.cleaned_data:
                 if form:

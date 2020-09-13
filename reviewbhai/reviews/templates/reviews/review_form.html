@@ -12,10 +12,57 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{formset|crispy}}
-            {{reviewForm|crispy}}
+
+            <div  data-validate="Name is reauired">
+                <span>Restaurent</span>
+                <select id="{{ reviewForm.restaurentOrPlace.id_for_label }}" class="select form-control"  name="{{ reviewForm.restaurentOrPlace.html_name }}" required >
+                    {%for restaurent in reviewForm.restaurentOrPlace %}
+                        {{restaurent}}
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div  data-validate="Name is reauired">
+                <span>Title</span>
+                <input id="{{ reviewForm.review_title.id_for_label }}" class="textinput textInput form-control" type="text" name="{{ reviewForm.review_title.html_name }}" maxlength="100" autofocus=""  placeholder="Type your Name" required >
+            </div>
+
+            <div  data-validate="Name is reauired">
+                <span>Review Body</span>
+                <textarea id="{{ reviewForm.review_body.id_for_label }}" class="textarea form-control"  name="{{ reviewForm.review_body.html_name }}" cols="40" rows="10"    placeholder="Type your Name" required ></textarea>
+            </div>
+
+            <div  data-validate="Name is reauired">
+                <span>Tag</span>
+                <select id="{{ reviewForm.tags.id_for_label }}" class="selectmultiple form-control"  name="{{ reviewForm.tags.html_name }}" required="" multiple="">
+                    {%for tag in reviewForm.tags %}
+                        {{tag}}
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div  data-validate="Name is reauired">
+                <span>Item</span>
+                <select id="{{ reviewForm.items.id_for_label }}" class="selectmultiple form-control"  name="{{ reviewForm.items.html_name }}" required="" multiple="">
+                    {%for item in reviewForm.items %}
+                        {{item}}
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="{{ reviewForm.is_offer_or_planned.id_for_label }}">
+                <label class="form-check-label" for="{{ reviewForm.is_offer_or_planned.id_for_label }}">Offered Food</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="{{ reviewForm.is_recommended.id_for_label }}">
+                <label class="form-check-label" for="{{ reviewForm.is_recommended.id_for_label }}">Recommended</label>
+            </div>
+
             <div>
                 <button type="submit" class="btn btn-info">Post</button>
             </div>
+
         </form>
     </div>
 
