@@ -70,7 +70,7 @@ class Account(AbstractBaseUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(Account,on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg',upload_to='profile_photos')
+    image = models.ImageField(default='default.png',upload_to='profile_photos')
 
     def __str__(self):
         return self.user.username

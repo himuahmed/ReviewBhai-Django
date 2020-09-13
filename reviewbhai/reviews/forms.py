@@ -6,7 +6,7 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ['review_title','review_body','tags','items','is_offer_or_planned','is_recommended']
+        fields = ['restaurentOrPlace','review_title','review_body','tags','items','is_offer_or_planned','is_recommended']
 
 class ImageForm(forms.ModelForm):
     image = forms.ImageField(label='Image')

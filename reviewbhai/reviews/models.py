@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
+
 from accounts.models import models
 from django.conf import settings
 from django.utils import timezone
@@ -27,6 +28,22 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
+##model for restaurent_or_place
+class RestaurentOrPlace(models.Model):
+    OPTIONS = (
+        ('Restaurent', 'Restaurent'),
+        ('Place','Place'),
+    )
+    name = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE)
+    location = models.CharField(verbose_name= 'Location', null =True, max_length = 200)
+    restaurent_place = models.CharField(max_length = 50, choices = OPTIONS)
+    created_at = models.DateTimeField(default = timezone.now)
+
+    def __str__(self):
+        return self.name.username
+
+
+
 ## Model for review
 class Review(models.Model):
     review_title = models.CharField(verbose_name='Title', max_length=100)
@@ -37,9 +54,10 @@ class Review(models.Model):
     time_posted = models.DateTimeField(default=timezone.now)
     post_or_discussion = models.CharField(max_length=20,null=None)
     food_or_travel = models.CharField(verbose_name='Foods or Travel',max_length=20)
-    slug = models.SlugField(null=False,unique=True)
+    slug = models.SlugField(null=False,unique=True,max_length = 300)
     tags = models.ManyToManyField(Tag)
     items = models.ManyToManyField(Item)
+    restaurentOrPlace = models.ForeignKey(RestaurentOrPlace, on_delete = models.CASCADE)
 
     def __str__(self):
         return self.review_title

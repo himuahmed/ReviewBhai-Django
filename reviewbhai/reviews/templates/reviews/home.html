@@ -6,7 +6,8 @@
             <img class="rounded-circle article-img" src="{{item.author.profile.image.url}}">
             <div class="media-body">
                 <div class="article-metadata" style="border:none;">
-                    <a class="mr-2" href="{%url 'profile' item.author.username %}">{{item.author.fullname}}</a>
+                    <a class="mr-2" href="{%url 'profile' item.author.username %}">{{item.author.fullname}}</a>reviewed
+                    <a class="mr-2" href="{%url 'profile' item.restaurentOrPlace.name.username %}">{{item.restaurentOrPlace.name}} </a>
                     <small class="text-muted">{{item.time_posted|date:"F d,Y"}}</small>
                 </div>
                 <div class="card" style="border:none;" >
@@ -20,6 +21,17 @@
                         <div class="card-block px-1">
                           <h4><a class="article-title" href="{% url 'reviewdetails' item.slug %}">{{item.review_title}}</a> </h4>
                            <p class="article-content">{{item.review_body | truncatewords_html:40}}</p>
+                            <div class="row">
+                                {% for tag in item.items.all %}
+                                    <p class="article-content">{{tag.name}}</p>
+                                {% endfor %}
+                            </div>
+
+                            <div class="'row">
+                                {% for tag in item.tags.all %}
+                                    <p class="article-content">{{tag.tag_name}}</p>
+                                {% endfor %}
+                            </div>
                           <a href="{% url 'reviewdetails' item.slug %}" class="btn btn-primary">Read More</a>
                         </div>
                       </div>
