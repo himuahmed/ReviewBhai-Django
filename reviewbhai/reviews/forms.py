@@ -32,5 +32,6 @@ class UpdateReviewForm(ReviewFullForm):
         review = self.instance
         if commit:
             review.save()
+
         return review
 

@@ -2,6 +2,7 @@
 {% block content %}
 
 {% for item in reviews %}
+
         <article class="media content-section">
             <img class="rounded-circle article-img" src="{{item.author.profile.image.url}}">
             <div class="media-body">
@@ -20,7 +21,10 @@
                       <div class="col-md-9 px-1">
                         <div class="card-block px-1">
                           <h4><a class="article-title" href="{% url 'reviewdetails' item.slug %}">{{item.review_title}}</a> </h4>
-                           <p class="article-content">{{item.review_body | truncatewords_html:40}}</p>
+                            <div>
+                                <p class="article-content">{{item.review_body | truncatewords_html:40}}</p>
+                            </div>
+
                             <div class="row">
                                 {% for tag in item.items.all %}
                                     <p class="article-content">{{tag.name}}</p>
@@ -40,6 +44,21 @@
             </div>
         </article>
 {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
