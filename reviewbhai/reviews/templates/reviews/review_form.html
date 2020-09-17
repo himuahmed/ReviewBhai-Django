@@ -12,6 +12,7 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{formset|crispy}}
+            {{starsForm|crispy}}
 
             <div  data-validate="Name is reauired">
                 <span>Restaurent</span>
@@ -40,9 +41,6 @@
                             {{item}}
                         {%endfor%}
                 </select>
-            </div>
-
-            <div >
                 <span>Tags</span>
                 <select id="choices-multiple-remove-button" placeholder="Select upto 5 tags" name="{{ reviewForm.tags.html_name }}"  multiple>
                     {%for tag in reviewForm.tags %}

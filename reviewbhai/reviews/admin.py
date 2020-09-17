@@ -1,5 +1,5 @@
 from django.contrib import admin
-from.models import Review,Tag,Item, RestaurentOrPlace
+from.models import Review,Tag,Item, RestaurentOrPlace, Star
 # Register your models here.
 admin.site.register(Review)
 
@@ -32,6 +32,18 @@ class RestaurentAdmin(admin.ModelAdmin):
     filter_horizontal = ()
     list_filter = ()
 
+
+class RatingsAdmin(admin.ModelAdmin):
+    list_display = ('post_id','food','environment','service','cleanliness')
+    search_fields = ('post_id','food','environment','service','cleanliness')
+    read_only = ('post_id')
+
+    fieldsets = ()
+    filter_horizontal = ()
+    list_filter = ()
+
+
 admin.site.register(Tag,TagAdmin)
 admin.site.register(Item,ItemAdmin)
 admin.site.register(RestaurentOrPlace,RestaurentAdmin)
+admin.site.register(Star,RatingsAdmin)

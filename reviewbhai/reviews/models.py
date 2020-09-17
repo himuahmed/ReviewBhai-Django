@@ -73,7 +73,7 @@ class Review(models.Model):
 
 ## model for stars
 class Star(models.Model):
-    post_id = models.ForeignKey(Review, on_delete = models.CASCADE )
+    post_id = models.ForeignKey(Review,related_name='post_review', on_delete = models.CASCADE )
     food = models.FloatField(verbose_name='Food',null=False)
     environment = models.FloatField(verbose_name='Food',null=False)
     service = models.FloatField(verbose_name='Food',null=False)

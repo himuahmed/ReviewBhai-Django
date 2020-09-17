@@ -260,6 +260,7 @@ text-align: center;
  color: #8d8d8d;
 }
 </style>
+
 {% for item in reviews %}
 
         <article class="media content-section">
@@ -356,8 +357,24 @@ text-align: center;
                  {% endfor %}
                  <div class="card-block px-2 py-3">
                      <h4><a class="article-title "  href="{% url 'reviewdetails' item.slug %}"><strong>{{item.review_title}}</strong></a> </h4>
+                     <div>
+                         {% for star in stars %}
+                            {%if item == star.post_id%}
+                             <div  style="padding-bottom: 15px;padding-top: 15px;">
+                                 <div class="row">
+                                    <div class="article-content offset-lg-2">food = {{star.food}} </div>
+                                    <div class="article-content offset-lg-2">environment = {{star.environment}} </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="article-content offset-lg-2">service = {{star.service}} </div>
+                                     <div class="article-content offset-lg-2">cleanliness = {{star.cleanliness}} </div>
+                                 </div>
+                             </div>
+                            {%endif%}
+                         {% endfor %}
+                     </div>
                     <div>
-                        <p class="article-content">{{item.review_body | truncatewords_html:40}}<a href="{% url 'reviewdetails' item.slug %}"> Read More</a></p>
+                        <p class="article-content">{{item.review_body | truncatechars:255}}<a href="{% url 'reviewdetails' item.slug %}"> Read More</a></p>
                     </div>
                     <div class="tags mb-3">
                         {% for tag in item.tags.all %}
