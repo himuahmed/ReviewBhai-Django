@@ -28,7 +28,6 @@ def CreateReview(request):
             review_form.save()
             reviewForm.save_m2m()
             instance = review_form
-            print(instance.id)
             star_form = starsForm.save(commit=False)
             star_form.post_id = instance
             star_form.save()

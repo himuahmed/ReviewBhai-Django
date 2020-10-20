@@ -14,26 +14,24 @@
             {{formset|crispy}}
             {{starsForm|crispy}}
 
-            <div  data-validate="Name is reauired">
+            <div  data-validate="Restaurent is reauired">
                 <span>Restaurent</span>
-                <select id="{{ reviewForm.restaurentOrPlace.id_for_label }}" class="select form-control"  name="{{ reviewForm.restaurentOrPlace.html_name }}" required >
+                <select id="restaurent" placeholder="Select restaurent"  multiple>
                     {%for restaurent in reviewForm.restaurentOrPlace %}
                         {{restaurent}}
                     {%endfor%}
                 </select>
             </div>
 
-            <div  data-validate="Name is reauired">
+            <div  data-validate="Review is incomplete.">
                 <span>Title</span>
-                <input id="{{ reviewForm.review_title.id_for_label }}" class="textinput textInput form-control" type="text" name="{{ reviewForm.review_title.html_name }}" maxlength="100" autofocus=""  placeholder="Type your Name" required >
+                <input id="{{ reviewForm.review_title.id_for_label }}" class="textinput textInput form-control" type="text" name="{{ reviewForm.review_title.html_name }}" maxlength="100" autofocus=""  required >
             </div>
 
             <div  data-validate="Name is reauired">
                 <span>Review Body</span>
-                <textarea id="{{ reviewForm.review_body.id_for_label }}" class="textarea form-control"  name="{{ reviewForm.review_body.html_name }}" cols="40" rows="10"    placeholder="Type your Name" required ></textarea>
+                <textarea id="{{ reviewForm.review_body.id_for_label }}" class="textarea form-control"  name="{{ reviewForm.review_body.html_name }}" cols="40" rows="10"    placeholder="Including price to make your review better." required ></textarea>
             </div>
-
-
             <div >
                 <span>Items</span>
                 <select id="choices-multiple-remove-button" placeholder="Select upto 5 Items" name="{{ reviewForm.items.html_name }}"  multiple>
@@ -49,7 +47,6 @@
                 </select>
             </div>
 
-
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="{{ reviewForm.is_offer_or_planned.id_for_label }}">
                 <label class="form-check-label" for="{{ reviewForm.is_offer_or_planned.id_for_label }}">Offered Food</label>
@@ -58,16 +55,11 @@
                 <input type="checkbox" class="form-check-input" id="{{ reviewForm.is_recommended.id_for_label }}">
                 <label class="form-check-label" for="{{ reviewForm.is_recommended.id_for_label }}">Recommended</label>
             </div>
-
-
             <div>
                 <button type="submit" class="btn btn-info">Post</button>
             </div>
         </form>
-
     </div>
-
-
 <script src="{%static 'reviews/js/multiselectBox.js'%}"></script>
 {% endblock content %}
 
